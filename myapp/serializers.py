@@ -10,6 +10,10 @@ class PersonSerializer(serializers.ModelSerializer):
 
 
 class ClassroomSerializer(serializers.ModelSerializer):
+    teacher = serializers.PrimaryKeyRelatedField(
+        queryset=models.Person.objects.filter(type=models.Person.PersonType.TEACHER)
+    )
+
     class Meta:
         model = models.Classroom
         fields = '__all__'

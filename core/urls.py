@@ -6,6 +6,8 @@ from myapp import viewsets
 
 router = routers.DefaultRouter()
 router.register('people', viewsets.PersonViewSet)
+router.register('classrooms', viewsets.ClassroomViewSet)
+router.register('enrollments', viewsets.EnrollmentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
