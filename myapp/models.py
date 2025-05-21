@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -15,26 +16,15 @@ class BaseModel(models.Model):
         abstract = True
 
 
-class Person(BaseModel):
+class Person(AbstractUser):
     class PersonType(models.TextChoices):
         STUDENT = 'student', 'Student'
         TEACHER = 'teacher', 'Teacher'
 
-    name = models.CharField(
-        max_length=255,
-        unique=True
-    )
-    email = models.EmailField(
-        blank=False,
-        unique=True
-    )
-    type = models.CharField(
-        max_length=7,
-        choices=PersonType.choices
-    )
+    type = models.CharField(max_length=7, choices=PersonType.choices)
 
     def __str__(self):
-        return self.name
+        return self.get_full_name() or self.username
 
 
 class Classroom(BaseModel):
